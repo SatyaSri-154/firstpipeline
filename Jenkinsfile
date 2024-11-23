@@ -5,7 +5,7 @@ pipeline {
         REPO_URL = 'https://github.com/SatyaSri-154/firstpipeline.git' // Replace with your Git repo
         IMAGE_NAME = 'lakshmi-image'                              // Docker image name
         CONTAINER_NAME = 'lakshmi-container'		// Docker container name
-		REGISTRY_URL = 'lakshmisatya'
+	REGISTRY_URL = 'lakshmisatya'
     }
 
     stages {
