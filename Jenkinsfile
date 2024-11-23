@@ -4,7 +4,8 @@ pipeline {
     environment {
         REPO_URL = 'https://github.com/SatyaSri-154/firstpipeline.git' // Replace with your Git repo
         IMAGE_NAME = 'lakshmi-image'                              // Docker image name
-        CONTAINER_NAME = 'lakshmi-container'                      // Docker container name
+        CONTAINER_NAME = 'lakshmi-container'		// Docker container name
+		REGISTRY_URL = 'lakshmisatya'
     }
 
     stages {
@@ -23,6 +24,17 @@ pipeline {
                 """
             }
         }
+		stage('Publish Docker Image') {
+            steps {
+                echo 'Publishing Docker image...'
+                sh """
+                docker login -u ${REGISTRY_URL} 
+				docker tag ${IMAGE_NAME} ${REGISTRY_URL}/${IMAGE_NAME}:latest
+				docker push ${REGISTRY_URL}/${IMAGE_NAME}:latest
+                """
+            }
+        }
+	
 
         stage('Run Docker Container') {
             steps {
