@@ -21,6 +21,7 @@ pipeline {
                 echo 'Building Docker image...'
                 sh """
                 docker build -t ${IMAGE_NAME} .
+				docker tag ${IMAGE_NAME} ${REGISTRY_URL}/${IMAGE_NAME}:latest
                 """
             }
         }
@@ -28,8 +29,6 @@ pipeline {
             steps {
                 echo 'Publishing Docker image...'
                 sh """
-                docker login -u ${REGISTRY_URL} 
-				docker tag ${IMAGE_NAME} ${REGISTRY_URL}/${IMAGE_NAME}:latest
 				docker push ${REGISTRY_URL}/${IMAGE_NAME}:latest
                 """
             }
